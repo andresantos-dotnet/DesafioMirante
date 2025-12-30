@@ -1,0 +1,14 @@
+﻿*.dll
+*.pdb
+*.bin
+Webapi/bin
+Application/obj
+Application/bin
+CrossCutting/bin
+CrossCutting/obj
+Webapi/.vs
+Webapi/obj
+Domain/bin
+Domain/obj
+Infra/bin
+Infra/obj

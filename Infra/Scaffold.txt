@@ -1,0 +1,1 @@
+Scaffold-DbContext "Server=SQL9001.site4now.net;Database=db_aa3182_bemnaweb;User Id=db_aa3182_bemnaweb_admin;Password=Mirante@2026" -context DataBaseContext -o ORM\model Microsoft.EntityFrameworkCore.SqlServer -force
