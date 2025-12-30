@@ -19,11 +19,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// Registra dependências das camadas
-ConfigureService.ConfigureDependencies(builder.Services);
-
-// Registra AutoMapper escaneando todos os assemblies do projeto
-
 var config = new MapperConfiguration(cfg =>
 {
 
@@ -33,6 +28,13 @@ var config = new MapperConfiguration(cfg =>
 
 IMapper mapper = config.CreateMapper();
 builder.Services.AddSingleton(mapper);
+
+// Registra dependências das camadas
+ConfigureService.ConfigureDependencies(builder.Services);
+
+// Registra AutoMapper escaneando todos os assemblies do projeto
+
+
 
 var app = builder.Build();
 

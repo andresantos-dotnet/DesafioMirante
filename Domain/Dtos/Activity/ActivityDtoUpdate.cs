@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Dtos.Activity
 {
-    public class ActivityDtoCreate
+    public class ActivityDtoUpdate
     {
         private DateTime _createDate;
 
-        [Required (ErrorMessage ="Titulo da tarefa é obrigatório.")]
-        [StringLength (150, ErrorMessage = "Titulo deve ter no máximo {1} caracteres.")]
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Titulo da tarefa é obrigatório.")]
+        [StringLength(150, ErrorMessage = "Titulo deve ter no máximo {1} caracteres.")]
         public string Title { get; set; }
-        
+
         [StringLength(250, ErrorMessage = "Descrição deve ter no máximo {1} caracteres.")]
         public string? Description { get; set; }
 
@@ -24,13 +23,6 @@ namespace Domain.Dtos.Activity
 
         [Required(ErrorMessage = "Data de encerramento da tarefa é obrigatório.")]
         public DateTime DueDate { get; set; }
-        public DateTime CreateDate {
         
-            get { return _createDate; }
-            set
-            {
-                _createDate = value == null ? DateTime.Now : value;
-            }
-        }
     }
 }

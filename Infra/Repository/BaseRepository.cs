@@ -43,7 +43,7 @@ namespace Infra.Repository
             try
             {
 
-                var result = await _dataset.SingleOrDefaultAsync(n => n.Id.Equals(id) && n.Active);
+                var result = await _dataset.FirstOrDefaultAsync(n => n.Id.Equals(id) && n.Active);
                 if (result == null) return false;
 
                 result.UpdateDate = DateTime.Now;

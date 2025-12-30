@@ -41,14 +41,14 @@ namespace Application
             return _mapper.Map<IEnumerable<ActivityDto>>(listEntity);
         }
 
-        public async Task<ActivityDtoCreateResult> Post(ActivityDto activity)
+        public async Task<ActivityDtoCreateResult> Post(ActivityDtoCreate activity)
         {
             var entity = _mapper.Map<Activity>(activity);
             var result = await _repository.CreateAsync(entity);
             return _mapper.Map<ActivityDtoCreateResult>(result);
         }
 
-        public async Task<ActivityDtoUpdateResult> Put(ActivityDto activity)
+        public async Task<ActivityDtoUpdateResult> Put(ActivityDtoUpdate activity)
         {
             var entity = _mapper.Map<Activity>(activity);
             var result = await _repository.UpdateAsync(entity);

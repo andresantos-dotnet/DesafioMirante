@@ -35,7 +35,8 @@ namespace DesafioMirante.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("{id}", Name = "GetById")]
         public async Task<ActionResult> Get(int id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState); //400 solicitacao invalida
@@ -54,7 +55,7 @@ namespace DesafioMirante.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] ActivityDto activity)
+        public async Task<ActionResult> Post([FromBody] ActivityDtoCreate activity)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState); //400 solicitacao invalida
 
@@ -63,7 +64,7 @@ namespace DesafioMirante.Controllers
                 var result = await _activity.Post(activity);
                 if (result != null)
                 {
-                    return Created(new Uri(Url.Link("Get", new { id = result.Id })), result);
+                    return Created(new Uri(Url.Link("GetById", new { id = result.Id })), result);
                 }
                 else
                 {
@@ -78,7 +79,7 @@ namespace DesafioMirante.Controllers
 
 
         [HttpPut]
-        public async Task<ActionResult> Put([FromBody] ActivityDto activity)
+        public async Task<ActionResult> Put([FromBody] ActivityDtoUpdate activity)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState); //400 solicitacao invalida
 

@@ -11,8 +11,8 @@ namespace Domain.Interfaces.Application
     {
         Task<ActivityDto> Get(int id);
         Task<IEnumerable<ActivityDto>> GetAll();
-        Task<ActivityDtoCreateResult> Post(ActivityDto activity);
-        Task<ActivityDtoUpdateResult> Put(ActivityDto activity);
+        Task<ActivityDtoCreateResult> Post(ActivityDtoCreate activity);
+        Task<ActivityDtoUpdateResult> Put(ActivityDtoUpdate activity);
         Task<bool> Delete(int id);
 
     }

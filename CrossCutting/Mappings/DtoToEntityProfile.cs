@@ -14,7 +14,11 @@ namespace CrossCutting.Mappings
     {
         public DtoToEntityProfile() 
         {
-            CreateMap<Activity, ActivityDto>();
+            CreateMap<Activity, ActivityDto>().ReverseMap();
+            CreateMap<Activity, ActivityDtoCreate>().ReverseMap();
+            CreateMap<Activity, ActivityDtoUpdate>().ReverseMap();
+            CreateMap<Activity, ActivityDtoCreateResult>().ReverseMap();
+            CreateMap<Activity, ActivityDtoUpdateResult>().ReverseMap();
         }
     }
 }
