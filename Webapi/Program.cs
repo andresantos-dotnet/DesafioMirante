@@ -2,7 +2,7 @@ using Application;
 using CrossCutting.DependencyInjection;
 using Domain.Interfaces.Application;
 using Domain.Interfaces.Repository;
-using Infra.ORM.model;
+using Infra.ORM.Entities;
 using Infra.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;

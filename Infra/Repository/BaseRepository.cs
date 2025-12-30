@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.Repository;
-using Infra.ORM.model;
+using Infra.ORM.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;

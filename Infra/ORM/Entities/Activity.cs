@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Infra.ORM.model;
+namespace Infra.ORM.Entities;
 
 public partial class Activity
 {
