@@ -14,6 +14,7 @@ namespace Domain.Interfaces.Application
         Task<ActivityDtoCreateResult> Post(ActivityDtoCreate activity);
         Task<ActivityDtoUpdateResult> Put(ActivityDtoUpdate activity);
         Task<bool> Delete(int id);
+        Task<ActivityDtoCreateResult> Create(ActivityDtoCreate activity);
 
     }
 }

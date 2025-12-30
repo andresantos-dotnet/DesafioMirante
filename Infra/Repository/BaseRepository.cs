@@ -1,6 +1,6 @@
 ﻿using Domain;
 using Domain.Interfaces.Repository;
-using Infra.ORM.Entities;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
@@ -100,6 +100,21 @@ namespace Infra.Repository
                 _context.Entry(result).CurrentValues.SetValues(entity);
                 await _context.SaveChangesAsync();
 
+            }
+            catch (Exception ex) { throw ex; }
+
+            return entity;
+        }
+
+        public async Task<T> AddAsync(T entity)
+        {
+            try
+            {
+                entity.CreateDate = DateTime.Now;
+                entity.Active = true;
+                _dataset.Add(entity);
+
+               
             }
             catch (Exception ex) { throw ex; }
 

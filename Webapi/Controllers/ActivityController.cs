@@ -119,5 +119,30 @@ namespace DesafioMirante.Controllers
             }
         }
 
+
+
+        [HttpPost("Create")]
+        public async Task<ActionResult> Create([FromBody] ActivityDtoCreate activity)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState); //400 solicitacao invalida
+
+            try
+            {
+                var result = await _activity.Create(activity);
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (ArgumentException a)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, a.Message);
+            }
+        }
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Activity;
-using Infra.ORM.Entities;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

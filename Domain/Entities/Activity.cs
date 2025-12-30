@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Infra.ORM.Entities;
+namespace Domain.Entities;
 
 public partial class Activity : BaseEntity
 {

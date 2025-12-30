@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Activity;
+using Domain.Entities;
+using Domain.Interfaces;
 using Domain.Interfaces.Application;
 using Domain.Interfaces.Repository;
-using Infra.ORM.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,13 @@ namespace Application
 
         private IRepository<Activity> _repository;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _uow;
 
-        public ActivityApplication(IRepository<Activity> repository, IMapper mapper)
+        public ActivityApplication(IRepository<Activity> repository, IMapper mapper, IUnitOfWork uow)
         {
             _repository = repository;
             _mapper = mapper;
+            _uow = uow;
         }
 
         public async Task<bool> Delete(int id)
@@ -55,7 +58,29 @@ namespace Application
             return _mapper.Map<ActivityDtoUpdateResult>(result);
         }
 
+        public async Task<ActivityDtoCreateResult> Create(ActivityDtoCreate activity)
+        {
+            try
+            {
+                var entity = _mapper.Map<Activity>(activity);
+                var result = await _uow.ActivityRepository.AddAsync(entity);
+
+                await _uow.CommitAsync();
+                await _uow.CommitTransactionAsync();
+
+                return _mapper.Map<ActivityDtoCreateResult>(result);
+
+            }
+            catch
+            {
+
+                await _uow.RollbackTransactionAsync();
+                throw;
+
+            }
 
 
+
+        }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infra.ORM.Entities;
+namespace Domain.Entities;
 
 public partial class DataBaseContext : DbContext
 {

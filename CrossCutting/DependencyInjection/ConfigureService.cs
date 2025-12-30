@@ -1,8 +1,10 @@
 ﻿using Application;
+using Domain.Interfaces;
 using Domain.Interfaces.Application;
 using Domain.Interfaces.Repository;
-using Infra.ORM.Entities;
+using Domain.Entities;
 using Infra.Repository;
+using Infra.UoW;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -27,6 +29,9 @@ namespace CrossCutting.DependencyInjection
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             //Contexts
             serviceCollection.AddDbContext<DataBaseContext>(options => options.UseSqlServer(connectionString));
+
+            // Registra o Unit of Work
+            serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
 
         }
     }
