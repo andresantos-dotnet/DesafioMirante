@@ -1,5 +1,6 @@
 using AutoMapper;
 using CrossCutting.DependencyInjection;
+using CrossCutting.Mappings;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
@@ -18,11 +19,20 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// Registra AutoMapper escaneando todos os assemblies do projeto
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 // Registra dependências das camadas
 ConfigureService.ConfigureDependencies(builder.Services);
+
+// Registra AutoMapper escaneando todos os assemblies do projeto
+
+var config = new MapperConfiguration(cfg =>
+{
+
+    cfg.AddProfile(new DtoToEntityProfile());
+    cfg.AddProfile(new EntitiyToDtoProfile());
+});
+
+IMapper mapper = config.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
