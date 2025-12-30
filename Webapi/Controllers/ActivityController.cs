@@ -1,4 +1,4 @@
-using Domain.Entities;
+using Domain.Dtos.Activity;
 using Domain.Interfaces.Application;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -54,7 +54,7 @@ namespace DesafioMirante.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] ActivityEntity activity)
+        public async Task<ActionResult> Post([FromBody] ActivityDto activity)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState); //400 solicitacao invalida
 
@@ -78,7 +78,7 @@ namespace DesafioMirante.Controllers
 
 
         [HttpPut]
-        public async Task<ActionResult> Put([FromBody] ActivityEntity activity)
+        public async Task<ActionResult> Put([FromBody] ActivityDto activity)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState); //400 solicitacao invalida
 

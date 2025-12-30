@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Dtos.Activity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,10 @@ namespace Domain.Interfaces.Application
 {
     public interface IActivityApplication
     {
-        Task<ActivityEntity> Get(int id);
-        Task<IEnumerable<ActivityEntity>> GetAll();
-        Task<ActivityEntity> Post(ActivityEntity activity);
-        Task<ActivityEntity> Put(ActivityEntity activity);
+        Task<ActivityDto> Get(int id);
+        Task<IEnumerable<ActivityDto>> GetAll();
+        Task<ActivityDtoCreateResult> Post(ActivityDto activity);
+        Task<ActivityDtoUpdateResult> Put(ActivityDto activity);
         Task<bool> Delete(int id);
 
     }
