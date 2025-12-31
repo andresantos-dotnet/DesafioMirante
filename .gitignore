@@ -14,3 +14,11 @@ Infra/bin
 Infra/obj
 /.vs/DesafioMirante.slnx
 .vs/DesafioMirante/CopilotIndices
+/Domain.Tests/bin
+/Domain.Tests/obj
+/Infra.Tests/bin
+/Infra.Tests/obj/Debug/net10.0
+/Infra.Tests/obj/Release/net10.0
+/Infra.Tests/obj
+/WebAPI.Tests/bin
+/WebAPI.Tests/obj
