@@ -1,7 +1,10 @@
 <Solution>
   <Project Path="Application/Application.csproj" />
   <Project Path="CrossCutting/CrossCutting.csproj" Id="fdb05021-3492-475b-a043-5af3ff6d28a8" />
+  <Project Path="Domain.Tests/Domain.Tests.csproj" />
   <Project Path="Domain/Domain.csproj" />
+  <Project Path="Infra.Tests/Infra.Tests.csproj" />
   <Project Path="Infra/Infra.csproj" />
-  <Project Path="Webapi/webapi.csproj" DisplayName="Webapi" />
+  <Project Path="WebAPI.Tests/WebAPI.Tests.csproj" />
+  <Project Path="Webapi/webapi.csproj" />
 </Solution>

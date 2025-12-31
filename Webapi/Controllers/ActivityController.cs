@@ -3,7 +3,7 @@ using Domain.Interfaces.Application;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace DesafioMirante.Controllers
+namespace webapi.Controllers
 {
 
     [ApiController]
