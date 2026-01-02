@@ -22,4 +22,12 @@ namespace Domain.Dtos.Activity
         [Required(ErrorMessage = "Data de encerramento da tarefa é obrigatório")]
         public DateTime DueDate { get; set; }
     }
+
+    public enum Status
+    {
+        Pendente,
+        EmAndamento,
+        Concluido
+    }
+
 }

@@ -48,7 +48,6 @@ public class ActivityRepositoryTests
         var all = await repo.GetAllAsync();
         var active = all.Where(a => a.Active).ToList();
 
-       // active.Should().HaveCount(2);
         active.All(a => a.Active).Should().BeTrue();
     }
 }

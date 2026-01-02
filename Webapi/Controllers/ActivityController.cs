@@ -1,5 +1,6 @@
 using Domain.Dtos.Activity;
 using Domain.Interfaces.Application;
+using Domain.Interfaces.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -33,6 +34,29 @@ namespace webapi.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, a.Message);
 
             }
+        }
+
+        [HttpGet("getAllStringStatus")]
+        public async Task<IActionResult> GetAllStringStatus()
+        {
+            var activities = await _activity.GetAll();
+             var result =  activities.Select(a => new ActivityDtoReturn
+                {
+                    Title = a.Title,
+                    Description = a.Description,
+                    TaskStatus = ((Status)a.TaskStatus).ToString(), 
+                    DueDate = a.DueDate,
+                })
+                .ToList();
+            try
+            {
+                return Ok(result);
+            }
+            catch (ArgumentException a)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, a.Message);
+            }
+            
         }
 
         [HttpGet]
@@ -76,6 +100,39 @@ namespace webapi.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, a.Message);
             }
         }
+
+        [HttpPost("createWithStatusString")]
+        public async Task<IActionResult> CreateWithStatus([FromBody] ActivityDtoCreateStringStatus dto)
+        {
+            if (!Enum.TryParse<Status>(dto.TaskStatus, true, out var statusEnum))
+            {
+                return BadRequest(new { error = "Status inválido. Valores aceitos: Pendente, EmAndamento, Concluido" });
+            }
+
+            int statusInt = (int)statusEnum;
+
+            var activity = new ActivityDtoCreate
+            {
+                Title = dto.Title,
+                Description = dto.Description,
+                TaskStatus = (short)statusInt,
+                DueDate = dto.DueDate,
+                CreateDate = dto.CreateDate
+            };
+
+            var result = await _activity.Post(activity);
+
+            if (result != null)
+            {
+                return Created(new Uri(Url.Link("GetById", new { id = result.Id })), result);
+            }
+            else
+            {
+                return BadRequest();
+            }
+           
+        }
+
 
 
         [HttpPut]
