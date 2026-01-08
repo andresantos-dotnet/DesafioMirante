@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Infra.ORM;
 
 namespace Infra.Repository
 {
@@ -71,7 +72,7 @@ namespace Infra.Repository
         {
             try
             {
-                return await _dataset.ToListAsync();
+                return await _dataset.Where(n=>n.Active).ToListAsync();
             }
             catch (Exception ex) { throw ex; }
 
@@ -91,11 +92,13 @@ namespace Infra.Repository
         {
             try
             {
-                var result = await _dataset.SingleOrDefaultAsync(n => n.Id.Equals(entity.Id) && n.Active);
+                var result = await _dataset.SingleOrDefaultAsync(n => n.Id.Equals(entity.Id));
                 if (result == null) return null;
 
                 entity.UpdateDate = DateTime.Now;
                 entity.CreateDate = result.CreateDate;
+                
+
 
                 _context.Entry(result).CurrentValues.SetValues(entity);
                 await _context.SaveChangesAsync();

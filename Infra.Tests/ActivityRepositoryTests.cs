@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using FluentAssertions;
+using Infra.ORM;
 using Infra.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;

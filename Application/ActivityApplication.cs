@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Activity;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Interfaces;
 using Domain.Interfaces.Application;
 using Domain.Interfaces.Repository;
@@ -41,6 +42,9 @@ namespace Application
         public async Task<IEnumerable<ActivityDto>> GetAll()
         {
             var listEntity = await _repository.GetAllAsync();
+
+                      
+
             return _mapper.Map<IEnumerable<ActivityDto>>(listEntity);
         }
 

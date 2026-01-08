@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore.Storage;
 using Domain.Entities;
+using Infra.ORM;
 
 namespace Infra.UoW
 {

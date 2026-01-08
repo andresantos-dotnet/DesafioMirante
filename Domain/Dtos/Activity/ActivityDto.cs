@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Domain.Enums;
 
 namespace Domain.Dtos.Activity
 {
@@ -21,13 +21,9 @@ namespace Domain.Dtos.Activity
 
         [Required(ErrorMessage = "Data de encerramento da tarefa é obrigatório")]
         public DateTime DueDate { get; set; }
+        public string TaskStatusString => ((TaskStatusEnum)TaskStatus).ToString();
     }
 
-    public enum Status
-    {
-        Pendente,
-        EmAndamento,
-        Concluido
-    }
+   
 
 }

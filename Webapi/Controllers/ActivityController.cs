@@ -1,4 +1,5 @@
 using Domain.Dtos.Activity;
+using Domain.Enums;
 using Domain.Interfaces.Application;
 using Domain.Interfaces.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -19,44 +20,19 @@ namespace webapi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAll()
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState); //400 solicitacao invalida
-
-            try
-            {
-
-                return Ok(await _activity.GetAll()); //200 sucesso
-            }
-            catch (ArgumentException a)
-            {
-
-                return StatusCode((int)HttpStatusCode.InternalServerError, a.Message);
-
-            }
-        }
-
-        [HttpGet("getAllStringStatus")]
-        public async Task<IActionResult> GetAllStringStatus()
+        public async Task<IActionResult> GetAll()
         {
             var activities = await _activity.GetAll();
-             var result =  activities.Select(a => new ActivityDtoReturn
-                {
-                    Title = a.Title,
-                    Description = a.Description,
-                    TaskStatus = ((Status)a.TaskStatus).ToString(), 
-                    DueDate = a.DueDate,
-                })
-                .ToList();
+            
             try
             {
-                return Ok(result);
+                return Ok(activities);
             }
             catch (ArgumentException a)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, a.Message);
             }
-            
+
         }
 
         [HttpGet]
@@ -79,48 +55,12 @@ namespace webapi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] ActivityDtoCreate activity)
+        public async Task<IActionResult> Create([FromBody] ActivityDtoCreate dto)
         {
+
             if (!ModelState.IsValid) return BadRequest(ModelState); //400 solicitacao invalida
 
-            try
-            {
-                var result = await _activity.Post(activity);
-                if (result != null)
-                {
-                    return Created(new Uri(Url.Link("GetById", new { id = result.Id })), result);
-                }
-                else
-                {
-                    return BadRequest();
-                }
-            }
-            catch (ArgumentException a)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError, a.Message);
-            }
-        }
-
-        [HttpPost("createWithStatusString")]
-        public async Task<IActionResult> CreateWithStatus([FromBody] ActivityDtoCreateStringStatus dto)
-        {
-            if (!Enum.TryParse<Status>(dto.TaskStatus, true, out var statusEnum))
-            {
-                return BadRequest(new { error = "Status inválido. Valores aceitos: Pendente, EmAndamento, Concluido" });
-            }
-
-            int statusInt = (int)statusEnum;
-
-            var activity = new ActivityDtoCreate
-            {
-                Title = dto.Title,
-                Description = dto.Description,
-                TaskStatus = (short)statusInt,
-                DueDate = dto.DueDate,
-                CreateDate = dto.CreateDate
-            };
-
-            var result = await _activity.Post(activity);
+            var result = await _activity.Post(dto);
 
             if (result != null)
             {
@@ -130,10 +70,8 @@ namespace webapi.Controllers
             {
                 return BadRequest();
             }
-           
+
         }
-
-
 
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] ActivityDtoUpdate activity)
@@ -176,10 +114,8 @@ namespace webapi.Controllers
             }
         }
 
-
-
-        [HttpPost("Create")]
-        public async Task<ActionResult> Create([FromBody] ActivityDtoCreate activity)
+        [HttpPost("CreateUow")]
+        public async Task<ActionResult> CreateUow([FromBody] ActivityDtoCreate activity)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState); //400 solicitacao invalida
 
